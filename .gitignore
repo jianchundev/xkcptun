@@ -42,3 +42,9 @@ cmake_install.cmake
 xkcp_client
 xkcp_server
 xkcp_spy
+
+# Local build directories and OpenHands artifacts
+build/
+build_py/
+.openhands/
+
