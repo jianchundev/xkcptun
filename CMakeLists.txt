@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 2.6)
 
 project(xkcptun C)
 
+include(CTest)
+
+
 set(src_xkcp_spy
 	xkcp_spy.c)
 
@@ -41,6 +44,12 @@ target_link_libraries(xkcp_spy ${link_flag} ${libs})
 
 add_executable(xkcp_client ${src_xkcp_client})
 target_link_libraries(xkcp_client ${link_flag} ${libs})
+
+if(BUILD_TESTING)
+    add_executable(ikcp_tests tests/test_ikcp.c ikcp.c)
+    target_include_directories(ikcp_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+    add_test(NAME ikcp_basic COMMAND ikcp_tests)
+endif()
 
 add_executable(xkcp_server ${src_xkcp_server})
 target_link_libraries(xkcp_server ${link_flag} ${libs})
